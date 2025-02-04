@@ -1,0 +1,38 @@
+html,
+body {
+  font-weight: 400;
+  color-scheme: light dark;
+  background-image: url("https://t4.ftcdn.net/jpg/01/97/94/41/360_F_197944144_hkdj580hGg9wcY5CJTKHALP97fMX32Jb.jpg");
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 400;
+}
+
+#root {
+  min-width: 320px;
+}
+
+.p-button:focus,
+.p-button:active,
+.p-button:focus-visible {
+  box-shadow: none;
+  outline: none;
+}
+
+.p-inputtext:focus,
+.p-inputtext:active,
+.p-inputtext:focus-visible {
+  box-shadow: none;
+  outline: none;
+}

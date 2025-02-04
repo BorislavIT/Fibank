@@ -1,0 +1,19 @@
+.authenticationContainer {
+  background-color: black;
+}
+
+.signInForm {
+  padding: 20px;
+  border: 1px solid grey;
+  display: flex;
+  gap: 30px;
+  flex-flow: column wrap;
+  width: 320px;
+}
+
+@media only screen and (max-width: 767px) {
+  .signInForm {
+    padding: 15px;
+    width: 260px;
+  }
+}
