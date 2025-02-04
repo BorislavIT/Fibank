@@ -1,4 +1,7 @@
+import { requiredFieldMessage } from "../../shared/constant";
 import { ILoginFormValues } from "./model";
+
+import * as Yup from "yup";
 
 export const initialFormValues: ILoginFormValues = {
   username: "",
@@ -20,3 +23,14 @@ export const minimumUsernameValidationMessage =
   "Username must be at least 4 symbols long.";
 export const maximumUsernameValidationMessage =
   "Username must be at most 30 symbols long.";
+
+export const signInSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(minimumUsernameLength, minimumUsernameValidationMessage)
+    .max(maximumUsernameLength, maximumUsernameValidationMessage)
+    .required(requiredFieldMessage),
+  password: Yup.string()
+    .min(minimumPasswordLength, minimumPasswordLengthValidationMessage)
+    .max(maximumPasswordLength, maximumPasswordLengthValidationMessage)
+    .required(requiredFieldMessage),
+});

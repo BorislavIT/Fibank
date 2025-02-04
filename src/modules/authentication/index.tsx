@@ -2,33 +2,9 @@ import { useContext } from "react";
 import { UserContext } from "./userContext";
 import { FiButton, FiInputText } from "../../base";
 import { useFormik } from "formik";
-import {
-  initialFormValues,
-  maximumPasswordLength,
-  maximumPasswordLengthValidationMessage,
-  maximumUsernameLength,
-  maximumUsernameValidationMessage,
-  minimumPasswordLength,
-  minimumPasswordLengthValidationMessage,
-  minimumUsernameLength,
-  minimumUsernameValidationMessage,
-} from "./constant";
-import { requiredFieldMessage } from "../../shared/constant";
-
-import * as Yup from "yup";
+import { initialFormValues, signInSchema } from "./constant";
 
 import "./authentication.css";
-
-const signInSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(minimumUsernameLength, minimumUsernameValidationMessage)
-    .max(maximumUsernameLength, maximumUsernameValidationMessage)
-    .required(requiredFieldMessage),
-  password: Yup.string()
-    .min(minimumPasswordLength, minimumPasswordLengthValidationMessage)
-    .max(maximumPasswordLength, maximumPasswordLengthValidationMessage)
-    .required(requiredFieldMessage),
-});
 
 export const AuthenticationPage = () => {
   const { login } = useContext(UserContext);
@@ -47,7 +23,6 @@ export const AuthenticationPage = () => {
       <div className="signInFormContainer">
         <form onSubmit={formik.handleSubmit} className="p-fluid signInForm">
           <h3 className="authentication-header">Sign in page</h3>
-
           <div>
             <span>
               <label htmlFor="username">Username</label>
@@ -60,7 +35,6 @@ export const AuthenticationPage = () => {
             </span>
             <small className="p-error">{formik.errors.username}</small>
           </div>
-
           <div>
             <span>
               <label htmlFor="password">Password</label>

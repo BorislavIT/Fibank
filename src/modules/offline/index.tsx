@@ -1,14 +1,28 @@
-import { IOfflineModalProps } from "./model";
+import { useState, useEffect } from "react";
+import { offlineEventListener, onlineEventListener } from "./constant";
+
 import "./offline.css";
 
-export function OfflineModal(props: IOfflineModalProps) {
-  const { isVisible } = props;
+export function OfflineModal() {
+  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener(onlineEventListener, handleOnline);
+    window.addEventListener(offlineEventListener, handleOffline);
+
+    return () => {
+      window.removeEventListener(onlineEventListener, handleOnline);
+      window.removeEventListener(offlineEventListener, handleOffline);
+    };
+  }, []);
 
   return (
-    <div className={`offlineModalOverlay ${isVisible && "isVisible"}`}>
+    <div className={`offlineModalOverlay ${Boolean(!isOnline) && "isVisible"}`}>
       <div className="offlineModal">
         <img src="/offline.png" alt="No connection" className="offlineImage" />
-        <p>You are currently offline. Please check your internet connection.</p>
       </div>
     </div>
   );

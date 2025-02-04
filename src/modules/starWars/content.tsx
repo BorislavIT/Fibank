@@ -25,7 +25,7 @@ export function PeopleTable(props: IPeopleTableProps) {
               <td data-label="Skin color">{p.skin_color}</td>
             </tr>
           ))}
-          {people?.length === 0 && (
+          {Boolean(people?.length === 0) && (
             <tr>
               <td colSpan={5}>
                 <span className="noResultsMessage">No results found.</span>

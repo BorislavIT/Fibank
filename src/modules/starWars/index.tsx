@@ -4,8 +4,9 @@ import { UserContext } from "../authentication/userContext";
 import { routerPaths } from "../../shared/constant";
 import { usePeople } from "./api";
 import { FiButton, FiInputText } from "../../base";
-import { debounce } from "../../shared/utilts";
+import { debounce } from "../../shared/helper";
 import { PeopleTableSkeleton, PeopleTable } from "./content";
+import { debounceDelay } from "./constant";
 
 import "./starWars.css";
 
@@ -28,7 +29,7 @@ export function StarWarsPage() {
   const debounceSearch = useCallback(
     debounce((value: string) => {
       setDebouncedSearch(value);
-    }, 300),
+    }, debounceDelay),
     []
   );
 
@@ -39,10 +40,13 @@ export function StarWarsPage() {
     debounceSearch(value);
   };
 
+  const isPreviousBtnDisabled = page > lastPage || page === 1;
+  const isNextBtnDisabled = page === lastPage || lastPage === 0;
+
   return (
     <div className="starWarsPage">
       <h3>Welcome {user.username}</h3>
-      {error && (
+      {Boolean(error) && (
         <div className="starWarsPageError">
           <p>{error}</p>
         </div>
@@ -64,14 +68,14 @@ export function StarWarsPage() {
         <FiButton
           onClick={() => setPage(page - 1)}
           className="prevBtn"
-          disabled={page > lastPage || page === 1}
+          disabled={isPreviousBtnDisabled}
         >
           Previous
         </FiButton>
         <FiButton
           onClick={() => setPage(page + 1)}
           className="nextBtn"
-          disabled={page === lastPage || lastPage === 0}
+          disabled={isNextBtnDisabled}
         >
           Next
         </FiButton>
